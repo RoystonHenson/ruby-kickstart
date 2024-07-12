@@ -8,3 +8,12 @@
 # alternate_words("Lorem ipsum dolor sit amet.")  # => ["Lorem", "dolor", "amet"]
 # alternate_words("Can't we all get along?")      # => ["Can't", "all", "along"]
 # alternate_words("Elementary, my dear Watson!")  # => ["Elementary", "dear"]
+
+def alternate_words(string)
+  words = []
+  string = string.tr("!@$#%^&*()-=_+[]:;,./<>?|", ' ')
+  string.split.each_slice(2) do |s, t|
+    words << s
+  end
+  words
+end

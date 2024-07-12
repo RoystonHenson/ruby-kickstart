@@ -9,7 +9,7 @@
 # its initialize method should receive the date, user , and text
 # have a method called summary that returns the first 10 words from the text (or the entire text if it is less than 10 words)
 #
-# Two blogs should be equal to eachother if they have the same user, date, and text
+# Two blogs should be equal to each other if they have the same user, date, and text
 # here is a partially filled out example of how to define the == operator:
 #      def ==(other)
 #        return self.date == other.date
@@ -41,7 +41,7 @@
 # porta lectus.
 # BLOG_ENTRY
 #
-# blog5.get_summary   # => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce orci"
+# blog5.summary   # => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce orci"
 # blog5.entry         # => QTSort 2010-05-28
 #                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce orci nunc, porta non tristique eu, auctor tincidunt mauris.
 #                          Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam vitae nibh sapien. Curabitur
@@ -58,9 +58,50 @@
 #                       From the school of revision, Comes the standard inventor's rule, Books of subtle notation Compositions, all original
 #                       I am a pioneer, synthetic engineer, On the brink of discovery, On the eve of historic light, Worked in secret for decades,
 #                       All my labor will be lost with time
-
-
-
 # date docs are at: http://ruby-doc.org/core/classes/Date.html
-# don't spend too much time worrying about them :)
+
 require 'date'
+
+class User
+  attr_accessor :username, :blogs
+
+  def initialize(name)
+    @username = name
+    @blogs = []
+  end
+
+  def add_blog(date, text)
+    blog =  Blog.new(Date.parse(date.to_s), @username, text)
+    @blogs << blog
+  end
+
+  def blogs
+    @blogs.size == 0 ? @blogs.each { |b| return b } : @blogs.sort_by(&:date).reverse
+  end
+end
+
+class Blog
+  attr_accessor :user, :date, :text
+
+  def initialize(date, user, text)
+    @date = date
+    @user = user
+    @text = text
+  end
+
+  def summary
+    text.split[0..9].join(' ')
+  end
+
+  def entry
+    "#{@user.username} #{@date}\n#{@text}"
+  end
+
+  def ==(other)
+    return self.user == other.user && self.date == other.date && self.text == other.text
+  end
+end
+
+
+
+

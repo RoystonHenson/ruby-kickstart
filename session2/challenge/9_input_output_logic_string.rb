@@ -24,7 +24,12 @@
 # USER:     BYE
 
 def deaf_grandma
-
+  answer = ''
+  while answer != 'BYE'
+    puts 'HUH?! SPEAK UP SONNY!'
+    answer = $stdin.gets.chomp
+    puts 'NO, NOT SINCE 1938!' if answer == answer.upcase
+  end
 end
 
 

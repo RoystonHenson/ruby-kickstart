@@ -19,7 +19,13 @@
 # and when you think it is correct, you can test it with  $ rake 2:2
 
 def hi_hi_goodbye
-  # your code here
+  input =''
+  while input != 'bye'
+    puts "\nEnter a number or type 'bye' to exit: "
+    input = $stdin.gets.chomp.downcase
+    puts 'goodbye' if input == 'bye'
+    print 'hi ' * input.to_i 
+  end
 end
 
 

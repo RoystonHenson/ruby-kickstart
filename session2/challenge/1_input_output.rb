@@ -8,5 +8,11 @@
 # "11\n7\n18\n" to standard output.
 
 def sum_difference_product
-  # your code goes here
+  puts 'Enter two numbers seperated by a space: '
+  input = $stdin.gets.chomp
+  x, y = input.split[0].to_i, input.split[1].to_i
+  sum = x + y
+  difference = x - y 
+  product = x * y
+  print "#{sum}\n#{difference}\n#{product}"
 end
