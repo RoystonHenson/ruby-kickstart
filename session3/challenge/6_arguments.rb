@@ -17,3 +17,20 @@
 # match_maker true,  true,  true, true, nil     # => [false, true]
 # match_maker true,  true,  true, 0, nil        # => [false, true]
 
+def match_maker(value, *elements)
+  array = []
+  if value
+    elements.each_slice(2) do |x, y|
+      x == nil || x == false ? x = false : x = true
+      y == nil || y == false ? y = false : y = true 
+      x != y ? array << true : array << false      
+    end
+  elsif !value
+    elements.each_slice(2) do |x, y|
+      x == nil || x == false ? x = false : x = true
+      y == nil || y == false ? y = false : y = true      
+      x == y ? array << true : array << false
+    end
+  end
+  array
+end
