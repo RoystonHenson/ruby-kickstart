@@ -29,4 +29,15 @@
 # shared [1,2,3], [3,2,1]            # => [{1=>[true, true], 2=>[true, true], 3=>[true, true]}, [1, 2, 3]]
 
 def shared(a, b)
+  hash = {}
+  a.each { |i| hash[i] = [[],[]] }
+  b.each { |i| hash[i] = [[], []] if hash[i] == nil }
+  hash.each_key { |i| a.include?(i) ? hash[i][0] << true : hash[i][0] << nil }
+  hash.each_key { |i| b.include?(i) ? hash[i][1] << true : hash[i][1] << nil }
+  array = []
+  hash.each { |i, j| array << i if hash[i] == [[true], [true]] }
+  to_return = []
+  hash.each_key {|i| hash[i].flatten! }
+  to_return.push(hash, array)
+  to_return
 end
